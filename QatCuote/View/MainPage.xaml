@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:QatCuote.Models"
+             xmlns:viewModel="clr-namespace:QatCuote.ViewModels"
+             x:DataType="viewModel:FactViewModel"
+             x:Class="QatCuote.MainPage">
+
+    <Grid RowDefinitions="*,Auto">
+        <CollectionView BackgroundColor="White"
+                        ItemsSource="{Binding Fact}"
+                        Grid.Row="0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:CatFact">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding Fact}"
+                               TextColor="Black"/>
+                        <Label Text="{Binding Length}"
+                               TextColor="Black"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <Button Text="Get quote"
+                Command="{Binding GetFactCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Row="1"
+                Margin="10"/>
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Center"
+                           Grid.RowSpan="2"/>
+
+    </Grid>
+
+
+</ContentPage>
